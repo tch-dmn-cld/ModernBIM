@@ -9,7 +9,12 @@
   };
   const xml = (text) => String(text).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
   const types = {
-    window: [{id:'window',name:'Двустворчатое окно',w:1500,h:1500}],
+    window: [
+      {id:'window-single',name:'Одностворчатое окно',leaves:1,w:900,h:1400,min:600,max:1400,sizes:['800x1200','900x1400','1000x1500','1200x1600']},
+      {id:'window',name:'Двустворчатое окно',leaves:2,w:1500,h:1500,min:900,max:2400,sizes:['1200x1400','1500x1500','1800x1600','2100x1800']},
+      {id:'window-triple',name:'Трёхстворчатое окно',leaves:3,w:2100,h:1500,min:1500,max:3000,sizes:['1800x1400','2100x1500','2400x1600','2700x1800']},
+      {id:'window-lower-transom',name:'Две створки + нижняя глухая фрамуга',leaves:2,transom:'bottom',w:1500,h:1800,min:1000,max:2400,sizes:['1200x1600','1500x1800','1800x1800','2100x2100']}
+    ],
     door: [
       {id:'metal-single',name:'Металлическая наружная · однопольная',leaves:1,w:1000,h:2100},
       {id:'metal-double',name:'Металлическая наружная · двупольная',leaves:2,w:1800,h:2100},
@@ -21,9 +26,24 @@
   let kind = 'window';
   const type = () => types[kind].find((t) => t.id === $('product-type').value) || types[kind][0];
   const appendOption = (select, text, value) => { const option = new Option(text, value); select.add(option); };
+  const windowFields = (t) => t.leaves === 1 ? ['window-left']
+    : t.leaves === 3 ? ['window-left','window-middle','window-right'] : ['window-left','window-right'];
+  function configureWindow(t) {
+    const lower = kind === 'window' && t.transom === 'bottom';
+    $('upper-transom-field').hidden = lower;
+    $('transom-height-label').textContent = lower ? 'Высота нижней фрамуги, мм' : 'Высота фрамуги, мм';
+    $('window-left-label').textContent = t.leaves === 1 ? 'Створка' : 'Левая створка';
+    $('window-right-field').hidden = kind !== 'window' || t.leaves === 1;
+    $('window-middle-field').hidden = kind !== 'window' || t.leaves !== 3;
+    ['window-left','window-right'].forEach((id) => {
+      const fixed = [...$(id).options].find((option) => option.value === 'fixed');
+      fixed.hidden = lower; fixed.disabled = lower;
+      if (lower && $(id).value === 'fixed') $(id).value = id === 'window-left' ? 'swing' : 'both';
+    });
+  }
   function sizes() {
     const t = type();
-    const values = kind === 'window' ? ['1200x1400','1500x1500','1800x1600','2100x1800']
+    const values = kind === 'window' ? t.sizes
       : t.leaves === 2 ? ['1200x2100','1500x2100','1800x2100','1800x2300','2100x2300']
       : ['800x2000','900x2100','1000x2100','1100x2300'];
     const select = $('family-size'); select.replaceChildren();
@@ -31,11 +51,12 @@
     appendOption(select, 'Свой типоразмер', 'custom');
     const size = t.w + 'x' + t.h;
     select.value = values.includes(size) ? size : 'custom';
-    $('family-width').min = String(kind === 'window' ? 900 : t.leaves === 2 ? 1200 : 700);
-    $('family-width').max = String(kind === 'window' ? 2400 : t.leaves === 2 ? 2400 : 1200);
-    $('family-height').min = String(kind === 'window' ? 1000 : 1800);
+    $('family-width').min = String(kind === 'window' ? t.min : t.leaves === 2 ? 1200 : 700);
+    $('family-width').max = String(kind === 'window' ? t.max : t.leaves === 2 ? 2400 : 1200);
+    $('family-height').min = String(kind === 'window' ? t.transom === 'bottom' ? 1200 : 1000 : 1800);
     $('family-height').max = String(kind === 'window' ? 2400 : 3000);
     $('family-width').value = String(t.w); $('family-height').value = String(t.h);
+    configureWindow(t);
   }
   function selectProduct(next) {
     if (!Object.hasOwn(types,next)) return;
@@ -43,6 +64,7 @@
     document.querySelectorAll('[data-product]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.product === kind)));
     const select = $('product-type'); select.replaceChildren();
     types[kind].forEach((t) => appendOption(select,t.name,t.id));
+    if (kind === 'window') select.value = 'window';
     $('opening-geometry').hidden = kind === 'drain';
     $('size-field').hidden = kind === 'drain';
     $('window-options').hidden = kind !== 'window';
@@ -65,22 +87,31 @@
   };
   function openingDrawing(w,h,transom,transomHeight) {
     const t = type(), s = Math.min(335 / w, 246 / h), W = w*s, H = h*s;
-    const x = (520-W)/2, y = 48 + (246-H)/2, top = transom ? transomHeight*s : 0;
-    const leafY=y+top+7, leafH=H-top-14;
+    const x = (520-W)/2, y = 48 + (246-H)/2;
+    const lower = kind === 'window' && t.transom === 'bottom';
+    const top = transom && !lower ? transomHeight*s : 0, bottom = lower ? transomHeight*s : 0;
+    const leafY=y+top+7, leafH=H-top-bottom-14;
     let svg = '<title>Условная схема '+xml(t.name)+'</title>';
     if ($('family-reveals').checked) svg += rect(x-13,y-13,W+26,H+13,'product-reveal');
     svg += rect(x,y,W,H) + rect(x+5,y+5,W-10,H-10,'product-line');
-    if (transom) svg += rect(x+7,y+7,W-14,top-10,'product-glass') + path('M'+x+' '+(y+top)+'h'+W) + text(x+W/2,y+top/2+3,'ФРАМУГА','product-small');
+    if (transom) {
+      const height = top + bottom, transomY = lower ? y+H-bottom : y;
+      svg += '<g class="product-transom" data-position="'+(lower?'bottom':'top')+'">'
+        + rect(x+7,transomY+(lower?3:7),W-14,height-10,'product-glass')
+        + path('M'+x+' '+(lower?transomY:y+top)+'h'+W)
+        + text(x+W/2,transomY+height/2+3,'ГЛУХАЯ ФРАМУГА','product-small') + '</g>';
+    }
     if (kind === 'window') {
-      const half=(W-21)/2;
-      [0,1].forEach((index) => {
-        const lx=x+7+index*(half+7), mode=$(index===0?'window-left':'window-right').value;
-        svg += rect(lx,leafY,half,leafH,'product-glass');
-        svg += opening(lx+3,leafY+3,half-6,leafH-6,mode,index===0);
+      const fields=windowFields(t), leafW=(W-14-7*(fields.length-1))/fields.length;
+      fields.forEach((id,index) => {
+        const lx=x+7+index*(leafW+7), mode=$(id).value, hingeLeft=index===0;
+        svg += '<g class="window-leaf" data-opening="'+mode+'">' + rect(lx,leafY,leafW,leafH,'product-glass');
+        svg += opening(lx+3,leafY+3,leafW-6,leafH-6,mode,hingeLeft);
         if (mode!=='fixed') {
-          const handleX=index===0?lx+half-7:lx+7;
+          const handleX=hingeLeft?lx+leafW-7:lx+7;
           svg += path('M'+handleX+' '+(leafY+leafH/2-5)+'v10','product-hardware');
         }
+        svg += '</g>';
       });
       if ($('window-sill').checked) svg += rect(x-18,y+H+3,W+36,7,'product-accessory');
       if ($('window-drip').checked) svg += path('M'+(x-10)+' '+(y+H+16)+'h'+(W+20),'product-drip');
@@ -109,7 +140,9 @@
     svg += path('M'+x+' '+dimY+'h'+W+'M'+x+' '+(dimY-4)+'v8M'+(x+W)+' '+(dimY-4)+'v8','product-dimension');
     svg += text(x+W/2,dimY-7,format(w)+' мм','product-label');
     svg += text(x-26,y+H/2,format(h)+' мм','product-label','transform="rotate(-90 '+(x-26)+' '+(y+H/2)+')"');
-    svg += text(260,344,kind==='door'?($('door-opening').value==='right'?'ПРАВОЕ ОТКРЫВАНИЕ':'ЛЕВОЕ ОТКРЫВАНИЕ'):'ДВЕ СТВОРКИ · ВИД ИЗ ПОМЕЩЕНИЯ','product-small');
+    const windowNote = lower ? 'ДВЕ СТВОРКИ СВЕРХУ · ГЛУХАЯ ФРАМУГА СНИЗУ'
+      : (t.leaves===1?'ОДНА СТВОРКА':t.leaves===3?'ТРИ СЕКЦИИ':'ДВЕ СТВОРКИ')+' · ВИД ИЗ ПОМЕЩЕНИЯ';
+    svg += text(260,344,kind==='door'?($('door-opening').value==='right'?'ПРАВОЕ ОТКРЫВАНИЕ':'ЛЕВОЕ ОТКРЫВАНИЕ'):windowNote,'product-small');
     return svg;
   }
   function drainDrawing(length,height,outlets,diameter) {
@@ -141,7 +174,12 @@
     const width=number('family-width',t.w,+$('family-width').min,+$('family-width').max);
     const height=number('family-height',t.h,+$('family-height').min,+$('family-height').max);
     const depth=number('reveal-depth',200,50,600)/1000;
-    const transom=$('family-transom').checked, transomHeight=number('transom-height',400,200,Math.min(600,height*.35));
+    const lower = kind === 'window' && t.transom === 'bottom';
+    const transom=lower || $('family-transom').checked;
+    const maxTransomHeight=Math.min(600,Math.floor(height*.35/50)*50);
+    const transomHeight=Math.min(maxTransomHeight,number('transom-height',400,200,600));
+    $('transom-height').max=String(maxTransomHeight);
+    if (document.activeElement !== $('transom-height')) $('transom-height').value=String(transomHeight);
     const rows=[];let volume=width*height*count/1000000,unit='м²',source=t.name;
     $('transom-height-field').hidden=!transom;
     $('width-value').textContent=format(width)+' мм';$('height-value').textContent=format(height)+' мм';
@@ -157,10 +195,14 @@
       $('family-measure-label').textContent='ДЛИНА ТРУБ';
       $('estimate-formula').textContent='Высота стояка × число стояков × количество комплектов';
     }else{
-      const operable=kind==='window'?[$('window-left').value,$('window-right').value].filter(v=>v!=='fixed').length:0;
+      const operable=kind==='window'?windowFields(t).filter(id=>$(id).value!=='fixed').length:0;
       rows.push([kind==='window'?'Оконный блок':'Дверной блок',count,'шт.'],['Площадь проёмов',volume,'м²']);
-      rows.push(['Рама',count,'шт.'],['Створки / полотна',(kind==='window'?2:t.leaves)*count,'шт.']);
-      if(transom)rows.push(['Верхняя фрамуга',count,'шт.']);
+      rows.push(['Рама',count,'шт.']);
+      if(kind==='window') {
+        rows.push(['Открывающиеся створки',operable*count,'шт.']);
+        if(t.leaves>operable)rows.push(['Глухие секции',(t.leaves-operable)*count,'шт.']);
+      } else rows.push(['Полотна',t.leaves*count,'шт.']);
+      if(transom)rows.push([lower?'Нижняя глухая фрамуга':'Верхняя глухая фрамуга',count,'шт.']);
       if(kind==='window'){
         rows.push(['Оконные ручки',operable*count,'шт.'],['Петли (по 2 на подвижную створку)',2*operable*count,'шт.']);
         if($('window-sill').checked)rows.push(['Подоконник',width*count/1000,'м']);
@@ -173,7 +215,7 @@
       }
       if($('family-reveals').checked)rows.push(['Боковые откосы',2*height/1000*depth*count,'м²'],['Верхний откос',width/1000*depth*count,'м²']);
       $('product-diagram').innerHTML=openingDrawing(width,height,transom,transomHeight);
-      $('product-view-note').textContent='Вид из помещения. На схеме один экземпляр; спецификация учитывает все комплекты.' + (kind==='window' && $('window-drip').checked ? ' Отлив показан синим пунктиром.' : '');
+      $('product-view-note').textContent='Вид из помещения. '+(lower?'Две открывающиеся створки сверху, глухая фрамуга снизу. ':'')+'На схеме один экземпляр; спецификация учитывает все комплекты.' + (kind==='window' && $('window-drip').checked ? ' Отлив показан синим пунктиром.' : '');
       $('family-measure-label').textContent='ПЛОЩАДЬ ПРОЁМОВ';
       $('estimate-formula').textContent='Ширина × высота × количество';
     }
@@ -193,10 +235,10 @@
     }update();
   });
   ['family-width','family-height'].forEach(id=>$(id).addEventListener('input',()=>{$('family-size').value='custom';update();}));
-  ['family-transom','transom-height','reveal-depth','family-reveals','window-left','window-right','window-sill','window-drip','door-opening','door-handle','door-closer','drain-length','drain-height','drain-outlets','drain-diameter','family-count','unit-rate'].forEach(id=>$(id).addEventListener('input',update));
+  ['family-transom','transom-height','reveal-depth','family-reveals','window-left','window-middle','window-right','window-sill','window-drip','door-opening','door-handle','door-closer','drain-length','drain-height','drain-outlets','drain-diameter','family-count','unit-rate'].forEach(id=>$(id).addEventListener('input',update));
   const bounds={'transom-height':[400,200,600],'reveal-depth':[200,50,600],'drain-length':[12,3,30],'drain-height':[6,2,18],'drain-outlets':[2,1,4],'family-count':[1,1,20],'unit-rate':[4500,0,1000000]};
   Object.entries(bounds).forEach(([id,[fallback,min,max]])=>$(id).addEventListener('change',()=>{
-    let value=number(id,fallback,min,max);if(['family-count','drain-outlets'].includes(id))value=Math.round(value);
+    let value=number(id,fallback,min,id==='transom-height'?+$('transom-height').max:max);if(id==='transom-height')value=Math.min(+$('transom-height').max,value);if(['family-count','drain-outlets'].includes(id))value=Math.round(value);
     $(id).value=String(value);update();
   }));
   selectProduct('window');
