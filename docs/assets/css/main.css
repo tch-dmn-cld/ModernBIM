@@ -59,7 +59,7 @@ button, a, svg { touch-action: manipulation; }
 .navigation a:hover, .text-link:hover, .footer-meta a:hover { color: var(--accent); }
 .theme-toggle { align-items: center; justify-content: center; width: 40px; height: 40px; flex: none; border: 1px solid var(--line); border-radius: 50%; color: var(--text); background: none; }
 .theme-toggle svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-.hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 34px; padding-block: 78px 68px; }
+.hero { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 34px; padding-block: 78px 68px; }
 .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 24px; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
 .tiny-square { width: 6px; height: 6px; background: var(--accent); }
 h1, h2, h3, p { overflow-wrap: break-word; }
@@ -76,6 +76,7 @@ h1 span { color: var(--accent); }
 .hero-note { margin: 30px 0 0; color: var(--subtle); font-size: 11px; letter-spacing: .015em; }
 .hero-note span { margin: 0 8px; color: var(--accent); }
 .model { position: relative; min-width: 0; background: radial-gradient(ellipse at 50% 45%, var(--surface), transparent 72%); }
+.model-caption, .model-disciplines, .mep-overview { overflow-anchor: none; }
 .model-heading { display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 20px; }
 .micro { font-family: "Consolas", "SFMono-Regular", monospace; font-size: 9px; letter-spacing: .13em; color: var(--subtle); }
 .model-badge { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line); padding: 3px 9px; font-size: 9px; border-radius: 20px; color: var(--muted); }
@@ -102,14 +103,14 @@ h1 span { color: var(--accent); }
 .level-mark text { fill: var(--subtle); font: 8px monospace; }
 .drawing-label { position: absolute; bottom: 13px; left: 20px; display: flex; align-items: center; gap: 10px; font: 9px "Consolas", monospace; color: var(--subtle); }
 .cross { color: var(--accent); font-size: 18px; font-weight: 300; }
-.data-overlay { opacity: 0; transition: opacity .3s; }
+.data-overlay { opacity: 0; transition: opacity .22s; }
 [data-model-mode="data"] .data-overlay, [data-model-mode="quality"] .data-overlay { opacity: 1; }
 .callout-line { fill: none; stroke: var(--accent); stroke-width: .8; stroke-dasharray: 4 3; }
 .callout-point { fill: var(--accent); }
 .callout-box { fill: var(--surface); stroke: var(--line); }
 .callout-code { fill: var(--accent); font: 11px "Consolas", monospace; }
 .callout-label { fill: var(--muted); font: 9px "Segoe UI", sans-serif; }
-.quality-marker { opacity: 0; }
+.quality-marker { opacity: 0; transition: opacity .22s; }
 .quality-marker circle { fill: var(--surface); stroke: var(--amber); stroke-width: 1.6; }
 .quality-marker path { fill: none; stroke: var(--amber); stroke-width: 2; }
 [data-model-mode="quality"] .selected-face { fill: var(--amber); stroke: var(--amber); fill-opacity: .3; }
@@ -431,7 +432,7 @@ input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px 
 .plugin-intro .micro { margin: 0 0 16px; }
 .plugin-intro > p { color: var(--muted); font-size: 13px; line-height: 1.8; }
 /* Model views */
-.envelope,.engineering,.system-legend { transition: opacity .3s; }
+.envelope,.engineering,.structural-frame,.system-legend { transition: opacity .22s; }
 .engineering,.system-legend { opacity:0; pointer-events:none; }
 [data-model-mode="engineering"] .envelope { opacity:.15; }
 [data-model-mode="engineering"] .engineering,[data-model-mode="engineering"] .system-legend { opacity:1; }

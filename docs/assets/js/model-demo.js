@@ -6,10 +6,10 @@
   const description = document.getElementById('mep-focus-description');
   const buttons = [...document.querySelectorAll('[data-system-focus]')].filter(el=>el.tagName==='BUTTON');
   const summaries = {
-    all:'Разделы увязаны в общей системе координат.',
-    vent:'П1: забор и подготовка воздуха, подача в помещения. В1: удаление воздуха по отдельной сети.',
-    water:'Ввод, водомерный узел, разводка до приборов, водоразбор и отвод стоков в К1.',
-    heat:'ИТП на техническом этаже: теплообменники, циркуляция, подача и обратная линия к потребителям.'
+    all:'Архитектура, конструкции и инженерные системы — в единой системе координат.',
+    vent:'П1 — фильтрация, нагрев и подача наружного воздуха. В1 — удаление воздуха из помещений и выброс выше кровли.',
+    water:'В1 — холодное водоснабжение; Т3 / Т4 — подача и циркуляция ГВС; К1 — бытовая канализация.',
+    heat:'ИТП на отметке −3,200: теплообменники, циркуляционные насосы и трубопроводы к отопительным приборам и П1.'
   };
   function focus(system) {
     if (!Object.hasOwn(summaries,system)) return;
@@ -36,6 +36,6 @@
     detail.showModal();
   });
   document.getElementById('model-detail-close').addEventListener('click',()=>detail.close());
-  detail.addEventListener('close',()=>expand.focus());
+  detail.addEventListener('close',()=>expand.focus({preventScroll:true}));
   focus('all');
 })();

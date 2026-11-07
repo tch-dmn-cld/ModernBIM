@@ -25,16 +25,30 @@
     geometry: ['ЦИМ — источник достоверных данных.', 'Свойства элементов проверены, проектные решения согласованы, коллизии устранены. Данные модели служат основой для спецификаций, смет и строительства.'],
     data: ['Свойства элементов — часть модели.', 'Геометрия, материалы и технические характеристики связаны с элементами ЦИМ. Проверенные данные используются в спецификациях, расчётах и сметах.'],
     quality: ['Данные проверены. Решения согласованы.', 'Междисциплинарные коллизии устранены, необходимые свойства элементов заполнены. Участники проекта работают с согласованной информацией.'],
-    engineering: ['Все разделы — в сводной модели.', 'Архитектура, конструкции и инженерные системы увязаны в общих координатах. Проектные решения согласованы, междисциплинарные коллизии разрешены.']
+    engineering: ['Согласованные системы — в общей модели.', 'Архитектура, конструкции и инженерные системы увязаны в единой системе координат. Согласованы трассы, размещение оборудования и проходки через конструкции.']
   };
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let assemblyAnimations = [];
+  function assembleLayers(mode) {
+    assemblyAnimations.forEach((animation) => animation.cancel());
+    assemblyAnimations = [];
+    if (reducedMotion.matches) return;
+    const selector = mode === 'engineering' ? '.engineering > .mep-system'
+      : mode === 'geometry' ? '.structural-frame, .envelope' : '.data-overlay';
+    assemblyAnimations = [...model.querySelectorAll(selector)].map((layer, index) => layer.animate(
+      [{ transform: 'translateY(8px)' }, { transform: 'translateY(0)' }],
+      { duration: 240, delay: index * 35, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' }
+    ));
+  }
   modeButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const mode = button.dataset.mode;
-      if (!Object.hasOwn(captions, mode)) return;
+      if (!Object.hasOwn(captions, mode) || model.dataset.modelMode === mode) return;
       model.dataset.modelMode = mode;
       modeButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
       model.querySelector('.caption-title').textContent = captions[mode][0];
       model.querySelector('.caption-text').textContent = captions[mode][1];
+      assembleLayers(mode);
     });
   });
 
@@ -61,7 +75,7 @@
         else if (event.key === 'End') next = group.length - 1;
         else return;
         event.preventDefault();
-        group[next].focus();
+        group[next].focus({ preventScroll: true });
         group[next].click();
       });
     });
