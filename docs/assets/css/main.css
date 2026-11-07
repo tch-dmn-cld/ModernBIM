@@ -450,7 +450,7 @@ input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px 
 [data-theme="light"] .water-pipe,[data-theme="light"] .water-fixture,[data-theme="light"] .water-key { stroke:#227caa; }
 [data-theme="light"] .system-legend text { fill:var(--text); }
 .model-axis .axis-line { marker-end:url(#axis-arrow); }
-#axis-arrow path { stroke:var(--subtle); fill:none; stroke-width:.7; }
+marker[id$="axis-arrow"] path { stroke:var(--subtle); fill:none; stroke-width:.7; }
 .axis-label { text-anchor:middle; }
 .coordinates-label { fill:var(--subtle); font:7px "Consolas",monospace; letter-spacing:.08em; }
 .family-count-field { max-width:200px; margin-top:22px; }
@@ -542,3 +542,95 @@ input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px 
 @media (prefers-reduced-motion:reduce) {
   .envelope,.engineering,.system-legend { transition:none; }
 }
+
+/* Coordinated building systems */
+:root { --supply:#b9dfb4; --extract:#d4bc83; --water:#70b7eb; --drain:#b7a3db; --heat:#e7a170; --hot-water:#d78892; }
+[data-theme="light"] { --supply:#357b55; --extract:#8c691f; --water:#286d9e; --drain:#79549e; --heat:#ad572a; --hot-water:#a14761; }
+.structural-frame { opacity:.3; }
+.structural-slab { fill:var(--surface); fill-opacity:.15; stroke:var(--subtle); stroke-width:.55; }
+.structural-column,.structural-beam,.structural-footing,.stair-step { fill:var(--surface); stroke:var(--subtle); stroke-width:.6; }
+[data-model-mode="engineering"] .structural-frame { opacity:.24; }
+[data-model-mode="engineering"] .envelope { opacity:.08; }
+.mep-system { transition:opacity .2s; }
+.mep-vent { color:var(--supply); }
+.mep-water { color:var(--water); }
+.mep-heat { color:var(--heat); }
+.mep-route { fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.route-b1 { stroke:var(--water); }
+.route-p1 { stroke:var(--supply); stroke-width:.8; stroke-dasharray:3 2; }
+.route-t3 { stroke:var(--hot-water); }
+.route-t4 { stroke:var(--hot-water); stroke-dasharray:3 2; stroke-width:1.1; }
+.route-k1 { stroke:var(--drain); stroke-width:2.5; }
+.route-t1,.route-t11 { stroke:var(--heat); }
+.route-t2,.route-t21 { stroke:var(--heat); stroke-dasharray:4 2; stroke-width:1.3; }
+.mep-duct { stroke-width:.75; stroke-linejoin:round; }
+.duct-p1 { fill:color-mix(in srgb,var(--supply) 28%,var(--bg)); stroke:var(--supply); }
+.duct-v1 { fill:color-mix(in srgb,var(--extract) 22%,var(--bg)); stroke:var(--extract); }
+.mep-duct.face-top { fill-opacity:.9; }
+.mep-duct.face-side { fill-opacity:.6; }
+.ahu-body { fill:var(--surface); stroke:var(--supply); stroke-width:1; }
+.ahu-seam,.intake-louver { fill:none; stroke:var(--supply); stroke-width:.6; }
+.supply-terminal { fill:var(--surface); stroke:var(--supply); stroke-width:1; }
+.extract-terminal { fill:var(--surface); stroke:var(--extract); stroke-width:1; }
+.terminal-detail { fill:none; stroke:var(--supply); stroke-width:.7; }
+.mep-symbol { fill:var(--bg); stroke:currentColor; stroke-width:1.5; }
+.mep-symbol .symbol-solid { fill:currentColor; }
+.symbol-solid { fill:currentColor; }
+.sanitary-fixture { fill:var(--surface); stroke:var(--water); stroke-width:.8; }
+.fixture-bowl { fill:var(--bg); stroke:var(--water); stroke-width:.7; }
+.heat-exchanger,.expansion-vessel,.radiator { fill:var(--surface); stroke:var(--heat); stroke-width:.8; }
+.hx-plate,.radiator-fin { fill:none; stroke:var(--heat); stroke-width:.6; }
+.cable-tray { fill:none; stroke:var(--subtle); stroke-width:1.4; stroke-dasharray:3 1; opacity:.4; }
+.mep-tag { font:9px "Consolas",monospace; fill:var(--muted); paint-order:stroke; stroke:var(--bg); stroke-width:3; stroke-linejoin:round; }
+.tag-vent { fill:var(--supply); }
+.tag-extract { fill:var(--extract); }
+.tag-water { fill:var(--water); }
+.tag-drain { fill:var(--drain); }
+.tag-heat { fill:var(--heat); }
+[data-system-focus="all"] .mep-tag { opacity:0; }
+[data-system-focus="vent"] .mep-water,[data-system-focus="vent"] .mep-heat,
+[data-system-focus="water"] .mep-vent,[data-system-focus="water"] .mep-heat,
+[data-system-focus="heat"] .mep-vent,[data-system-focus="heat"] .mep-water { opacity:.035; }
+.mep-overview { display:none!important; margin-top:14px; }
+[data-model-mode="engineering"] .mep-overview { display:block!important; }
+.mep-filters { display:flex; flex-wrap:wrap; gap:6px; }
+.mep-filters button { padding:7px 10px; border:1px solid var(--line); border-radius:3px; background:transparent; color:var(--muted); font-size:11px; }
+.mep-filters button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); background:var(--surface); }
+.mep-legend { display:flex; flex-wrap:wrap; gap:8px 13px; margin-top:13px; color:var(--muted); font-size:10px; line-height:1.5; }
+.mep-legend span { display:flex; align-items:center; gap:5px; }
+.mep-legend i { display:block; width:13px; height:2px; }
+.key-supply { background:var(--supply); }.key-extract { background:var(--extract); }.key-water { background:var(--water); }.key-drain { background:var(--drain); }.key-heat { background:var(--heat); }
+.mep-view-actions { display:flex; align-items:start; gap:14px; margin-top:12px; }
+.mep-view-actions p { flex:1; margin:0; color:var(--subtle); font-size:10px; line-height:1.7; }
+.mep-view-actions button { flex:none; background:transparent; border:0; color:var(--accent); padding:0; font-size:11px; line-height:1.7; }
+.model-disciplines { margin:12px 4px 0; color:var(--subtle); font-size:10px; }
+[data-model-mode="quality"] .selected-face { fill:var(--accent); stroke:var(--accent); fill-opacity:.22; }
+.quality-marker circle,.quality-marker path { stroke:var(--accent); }
+.model-detail { width:min(1320px,calc(100vw - 50px)); max-width:none; max-height:calc(100vh - 48px); padding:30px; border:1px solid var(--line); border-radius:9px; background:var(--bg); color:var(--text); overflow:auto; }
+.model-detail::backdrop { background:rgb(0 0 0 / .76); }
+.detail-heading { display:flex; justify-content:space-between; align-items:start; gap:20px; margin-bottom:24px; }
+.detail-heading h2 { font-size:28px; }
+.detail-heading .micro { margin:0 0 12px; }
+.detail-heading button { color:var(--text); border:1px solid var(--line); background:transparent; border-radius:50%; width:35px; height:35px; font-size:24px; line-height:1; }
+.detail-layout { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(240px,1fr); gap:25px; align-items:start; }
+.detail-model { min-width:0; }
+.detail-model svg { width:100%; display:block; }
+.detail-spec { padding-top:26px; }
+.detail-spec h3 { font-size:16px; font-weight:500; line-height:1.5; margin:0 0 18px; }
+.detail-spec dl { margin:0; }
+.detail-spec dl>div { padding:13px 0; border-top:1px solid var(--line); }
+.detail-spec dt { font-size:12px; color:var(--accent); margin-bottom:6px; }
+.detail-spec dd { font-size:12px; color:var(--muted); line-height:1.75; margin:0; }
+.model-sources { border-top:1px solid var(--line); padding-top:17px; color:var(--subtle); font-size:11px; line-height:1.8; }
+.model-sources summary { cursor:pointer; color:var(--muted); }
+.model-sources div { display:flex; flex-wrap:wrap; gap:10px 18px; }
+.model-sources a { color:var(--accent); }
+@media(max-width:760px) {
+ .model-detail { width:calc(100vw - 20px); padding:17px; max-height:calc(100vh - 20px); }
+ .detail-layout { grid-template-columns:minmax(0,1fr); gap:0; }
+ .detail-heading h2 { font-size:23px; }
+ .detail-spec { padding-top:0; }
+ .mep-filters button { font-size:11px; padding:7px 8px; }
+ .mep-view-actions { flex-wrap:wrap; }
+}
+@media(prefers-reduced-motion:reduce) { .mep-system { transition:none; } }
