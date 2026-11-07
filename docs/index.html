@@ -8,10 +8,10 @@
     <meta name="theme-color" content="#111816">
     <title>ModernBIM — BIM инженер</title>
     <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-    <link rel="stylesheet" href="./assets/css/main.css?v=20261107-3">
-    <script src="./assets/js/main.js?v=20261107-3" defer></script>
-    <script src="./assets/js/family-demo.js?v=20261107-3" defer></script>
-    <script src="./assets/js/plugin-demo.js?v=20261107-3" defer></script>
+    <link rel="stylesheet" href="./assets/css/main.css?v=20261107-4">
+    <script src="./assets/js/main.js?v=20261107-4" defer></script>
+    <script src="./assets/js/family-demo.js?v=20261107-4" defer></script>
+    <script src="./assets/js/plugin-demo.js?v=20261107-4" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Перейти к содержимому</a>
@@ -45,46 +45,38 @@
           <p class="hero-note">Комплексная координация <span>·</span> BIM-менеджмент <span>·</span> Разработка</p>
         </div>
         <div class="model" data-model-mode="geometry">
-          <div class="model-heading"><span class="micro">ИНФОРМАЦИОННАЯ МОДЕЛЬ</span><span class="model-badge"><i></i>Сводная модель</span></div>
+          <div class="model-heading"><span class="micro">ЦИМ</span><span class="model-badge"><i></i>Сводная модель</span></div>
           <div class="model-viewport">
             <svg class="building" viewBox="0 0 580 460" role="img" aria-labelledby="building-title building-description">
-              <title id="building-title">От геометрии к проверенным данным</title>
-              <desc id="building-description">Условное здание с выделенным элементом. Переключатели под схемой показывают геометрию, сведения об элементе и статус их проверки.</desc>
-              <defs>
-                <pattern id="plan-grid" width="40" height="40" patternTransform="matrix(1 .5 -1 .5 280 310)" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" class="grid-line"/></pattern>
-                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="glass-start"/><stop offset="1" class="glass-end"/></linearGradient>
-              </defs>
-              <ellipse class="ground-glow" cx="305" cy="320" rx="220" ry="100"/>
-              <path d="M20 285 300 135 580 285 300 440Z" fill="url(#plan-grid)"/>
-              <g class="ground-dim"><path d="M101 329 246 405m36 0 205-106M96 324l10 10m135 66 10 10m25-10 10 10m195-116 10 10"/><text x="150" y="387" transform="rotate(28 150 387)">ОБЩИЕ КООРДИНАТЫ</text></g>
-              <path class="plinth" d="M118 319 270 398 483 290v10L270 408 118 330z"/>
-              <path class="building-left" d="M125 145 270 220v170l-145-75z"/>
-              <path class="building-right" d="M270 220 475 115v170L270 390z"/>
-              <g class="floor-lines">
-                <path d="M125 145 270 220 475 115M125 200 270 275 475 170M125 255 270 330 475 225M125 315 270 390 475 285"/>
-                <path d="M161 164v170m36-151v170m36-151v170M304 203v170m34-188v170m34-187v170m34-188v170m34-187v170"/>
-              </g>
-              <path class="building-roof" d="M125 145 330 40 475 115 270 220z"/>
-              <path class="roof-lines" d="M143 145 330 50 457 115 270 210zM225 151l95-49 59 31-95 49z"/>
-              <path class="roof-equipment" d="m225 151 95-49v-19l-95 49zm95-49 59 31v-19l-59-31zm-95 30 95-49 59 31-95 49z"/>
-              <path class="selected-face" d="M270 275 338 240v55l-68 35z"/>
-              <g class="model-axis"><path d="M55 396v-36m0 36 29-15m-29 15-25-13"/><text x="51" y="350">Z</text><text x="89" y="382">X</text><text x="17" y="383">Y</text></g>
-              <g class="data-overlay">
-                <path class="callout-line" d="M304 282 401 329h120"/>
-                <circle class="callout-point" cx="304" cy="282" r="5"/>
-                <rect class="callout-box" x="400" y="313" width="126" height="49" rx="8"/>
-                <text class="callout-code" x="413" y="332">ЭЛ-024</text>
-                <text class="callout-label" x="413" y="349">Наружная стена</text>
-                <g class="quality-marker"><circle cx="304" cy="282" r="14"/><path d="M304 274v10m0 4v1"/></g>
-              </g>
-              <g class="level-mark"><path d="M483 114h20m-20 55h20m-20 55h20m-20 60h20"/><text x="510" y="118">+9.000</text><text x="510" y="173">+6.000</text><text x="510" y="228">+3.000</text><text x="510" y="289">±0.000</text></g>
-            </svg>
+    <title id="building-title">Сводная цифровая информационная модель</title>
+    <desc id="building-description">Аксонометрическая схема здания. Оси X и Y параллельны рёбрам здания, Z направлена вверх. В режиме ИОС видны условные системы ОВ и ВК.</desc>
+    <defs><linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="glass-start"/><stop offset="1" class="glass-end"/></linearGradient><marker id="axis-arrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0 4 2.5 0 5"/></marker></defs>
+    <ellipse class="ground-glow" cx="300" cy="325" rx="225" ry="105"/>
+    <g class="site-grid"><polyline points="270,446 62.154,326" class="grid-line" /><polyline points="304.641,426 96.795,306" class="grid-line" /><polyline points="339.282,406 131.436,286" class="grid-line" /><polyline points="373.923,386 166.077,266" class="grid-line" /><polyline points="408.564,366 200.718,246" class="grid-line" /><polyline points="443.205,346 235.359,226" class="grid-line" /><polyline points="477.846,326 270,206" class="grid-line" /><polyline points="512.487,306 304.641,186" class="grid-line" /><polyline points="547.128,286 339.282,166" class="grid-line" /><polyline points="270,446 547.128,286" class="grid-line" /><polyline points="235.359,426 512.487,266" class="grid-line" /><polyline points="200.718,406 477.846,246" class="grid-line" /><polyline points="166.077,386 443.205,226" class="grid-line" /><polyline points="131.436,366 408.564,206" class="grid-line" /><polyline points="96.795,346 373.923,186" class="grid-line" /><polyline points="62.154,326 339.282,166" class="grid-line" /></g>
+    <g class="plinth"><polygon points="270,409 486.506,284 486.506,278 270,403" class="base-face box-front" /><polygon points="270,409 122.776,324 122.776,318 270,403" class="base-face box-side" /><polygon points="270,403 486.506,278 339.282,193 122.776,318" class="base-face box-top" /></g>
+    <g class="engineering"><polygon points="270,335 477.846,215 339.282,135 131.436,255" class="interior-floor" /><polygon points="270,275 477.846,155 339.282,75 131.436,195" class="interior-floor" /><g class="system-hvac"><polygon points="351.406,260 358.681,255.8 358.681,113.8 351.406,118" class="duct box-front" /><polygon points="351.406,260 344.132,255.8 344.132,113.8 351.406,118" class="duct box-side" /><polygon points="351.406,118 358.681,113.8 351.406,109.6 344.132,113.8" class="duct box-top" /><polygon points="235.359,285 358.335,214 358.335,208 235.359,279" class="duct box-front" /><polygon points="235.359,285 228.084,280.8 228.084,274.8 235.359,279" class="duct box-side" /><polygon points="235.359,279 358.335,208 351.06,203.8 228.084,274.8" class="duct box-top" /><polygon points="311.569,299 317.805,295.4 317.805,289.4 311.569,293" class="duct box-front" /><polygon points="311.569,299 219.771,246 219.771,240 311.569,293" class="duct box-side" /><polygon points="311.569,293 317.805,289.4 226.006,236.4 219.771,240" class="duct box-top" /><polygon points="307.239,303.5 321.962,295 321.962,292.6 307.239,301.1" class="air-terminal box-front" /><polygon points="307.239,303.5 298.579,298.5 298.579,296.1 307.239,301.1" class="air-terminal box-side" /><polygon points="307.239,301.1 321.962,292.6 313.301,287.6 298.579,296.1" class="air-terminal box-top" /><polygon points="235.359,225 358.335,154 358.335,148 235.359,219" class="duct box-front" /><polygon points="235.359,225 228.084,220.8 228.084,214.8 235.359,219" class="duct box-side" /><polygon points="235.359,219 358.335,148 351.06,143.8 228.084,214.8" class="duct box-top" /><polygon points="311.569,239 317.805,235.4 317.805,229.4 311.569,233" class="duct box-front" /><polygon points="311.569,239 219.771,186 219.771,180 311.569,233" class="duct box-side" /><polygon points="311.569,233 317.805,229.4 226.006,176.4 219.771,180" class="duct box-top" /><polygon points="307.239,243.5 321.962,235 321.962,232.6 307.239,241.1" class="air-terminal box-front" /><polygon points="307.239,243.5 298.579,238.5 298.579,236.1 307.239,241.1" class="air-terminal box-side" /><polygon points="307.239,241.1 321.962,232.6 313.301,227.6 298.579,236.1" class="air-terminal box-top" /><polygon points="235.359,185 358.335,114 358.335,108 235.359,179" class="duct box-front" /><polygon points="235.359,185 228.084,180.8 228.084,174.8 235.359,179" class="duct box-side" /><polygon points="235.359,179 358.335,108 351.06,103.8 228.084,174.8" class="duct box-top" /><polygon points="311.569,199 317.805,195.4 317.805,189.4 311.569,193" class="duct box-front" /><polygon points="311.569,199 219.771,146 219.771,140 311.569,193" class="duct box-side" /><polygon points="311.569,193 317.805,189.4 226.006,136.4 219.771,140" class="duct box-top" /><polygon points="307.239,203.5 321.962,195 321.962,192.6 307.239,201.1" class="air-terminal box-front" /><polygon points="307.239,203.5 298.579,198.5 298.579,196.1 307.239,201.1" class="air-terminal box-side" /><polygon points="307.239,201.1 321.962,192.6 313.301,187.6 298.579,196.1" class="air-terminal box-top" /></g><g class="system-water"><polyline points="266.536,349 266.536,195" class="water-pipe" /><polyline points="276.062,343.5 276.062,189.5" class="drain-pipe" /><polyline points="266.536,301 358.335,248 375.655,258" class="water-pipe" /><polyline points="276.062,301.5 366.995,249 384.315,259" class="drain-pipe" /><polygon points="375.655,272 396.44,260 396.44,255 375.655,267" class="water-fixture box-front" /><polygon points="375.655,272 365.263,266 365.263,261 375.655,267" class="water-fixture box-side" /><polygon points="375.655,267 396.44,255 386.047,249 365.263,261" class="water-fixture box-top" /><polyline points="266.536,241 358.335,188 375.655,198" class="water-pipe" /><polyline points="276.062,241.5 366.995,189 384.315,199" class="drain-pipe" /><polygon points="375.655,212 396.44,200 396.44,195 375.655,207" class="water-fixture box-front" /><polygon points="375.655,212 365.263,206 365.263,201 375.655,207" class="water-fixture box-side" /><polygon points="375.655,207 396.44,195 386.047,189 365.263,201" class="water-fixture box-top" /></g></g>
+    <g class="envelope">
+      <polygon points="270,395 131.436,315 131.436,135 270,215" class="building-left" data-plane="facade-left"/>
+      <polygon points="270,395 477.846,275 477.846,95 270,215" class="building-right" data-plane="facade-front"/>
+      <g class="floor-lines"><polyline points="131.436,315 270,395 477.846,275" class="floor-line" /><polyline points="131.436,255 270,335 477.846,215" class="floor-line" /><polyline points="131.436,195 270,275 477.846,155" class="floor-line" /><polyline points="131.436,135 270,215 477.846,95" class="floor-line" /><polyline points="235.359,375 235.359,195" class="floor-line" /><polyline points="200.718,355 200.718,175" class="floor-line" /><polyline points="166.077,335 166.077,155" class="floor-line" /><polyline points="304.641,375 304.641,195" class="floor-line" /><polyline points="339.282,355 339.282,175" class="floor-line" /><polyline points="373.923,335 373.923,155" class="floor-line" /><polyline points="408.564,315 408.564,135" class="floor-line" /><polyline points="443.205,295 443.205,115" class="floor-line" /></g>
+      <polygon points="270,215 477.846,95 339.282,15 131.436,135" class="building-roof" data-plane="roof"/>
+      <polygon points="270,207 463.99,95 339.282,23 145.292,135" class="roof-lines" />
+      <polygon points="299.445,152 382.583,104 382.583,88 299.445,136" class="roof-equipment box-front" /><polygon points="299.445,152 252.679,125 252.679,109 299.445,136" class="roof-equipment box-side" /><polygon points="299.445,136 382.583,88 335.818,61 252.679,109" class="roof-equipment box-top" />
+      <polygon points="270,335 339.282,295 339.282,235 270,275" class="selected-face" data-plane="selected-facade"/>
+    </g>
+    <g class="model-axis"><polyline points="55,405 85.311,387.5" class="axis-line" data-axis="x"/><polyline points="55,405 24.689,387.5" class="axis-line" data-axis="y"/><polyline points="55,405 55,370" class="axis-line" data-axis="z"/><text x="85.527" y="387.375" class="axis-label" >X</text><text x="24.473" y="387.375" class="axis-label" >Y</text><text x="55" y="369.75" class="axis-label" >Z</text></g>
+    <g class="data-overlay"><path class="callout-line" d="M304.641 285 370 344h174"/><circle class="callout-point" cx="304.641" cy="285" r="4"/><rect class="callout-box" x="370" y="322" width="178" height="54" rx="6"/><text class="callout-code" x="382" y="343">ВИТРАЖ ФАСАДА</text><text class="callout-label" x="382" y="362">Структурное остекление</text><g class="quality-marker"><circle cx="304.641" cy="285" r="13"/><path d="M304.641 277v10m0 4v1"/></g></g>
+    <g class="system-legend"><path class="hvac-key" d="M388 370h22"/><text x="418" y="373">ОВ · вентиляция</text><path class="water-key" d="M388 393h22"/><text x="418" y="396">ВК · вода и канализация</text></g>
+    <g class="level-mark"><path d="M486.846 275h20"/><text x="513.846" y="278">±0.000</text><path d="M486.846 215h20"/><text x="513.846" y="218">+3.000</text><path d="M486.846 155h20"/><text x="513.846" y="158">+6.000</text><path d="M486.846 95h20"/><text x="513.846" y="98">+9.000</text></g>
+    <text class="coordinates-label" x="150" y="431">ОБЩИЕ КООРДИНАТЫ · X / Y / Z</text>
+  </svg>
             <div class="drawing-label"><span class="cross" aria-hidden="true">+</span> Геометрия · Информация · Доверие</div>
           </div>
           <div class="model-controls js-only" role="group" aria-label="Режим демонстрации модели">
             <button type="button" data-mode="geometry" aria-pressed="true"><span>01</span> Модель</button>
             <button type="button" data-mode="data" aria-pressed="false"><span>02</span> Данные</button>
             <button type="button" data-mode="quality" aria-pressed="false"><span>03</span> Проверка</button>
+            <button type="button" data-mode="engineering" aria-pressed="false"><span>04</span> ИОС</button>
           </div>
           <div class="model-caption" aria-live="polite" aria-atomic="true">
             <p class="caption-title">Геометрия — только начало.</p>
@@ -123,9 +115,9 @@
             <article class="competence-panel" id="coordination">
               <div class="panel-topline"><span class="micro">СТРОИТЕЛЬСТВО / ПРОЕКТИРОВАНИЕ / МОДЕЛЬ</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 12h24v24H7zm10-6h24v24H17zM7 24h24m-12-12v24"/></svg></div>
               <h3>Разделы согласованы.<br>Данные взаимосвязаны.</h3>
-              <p>Координирую модели архитектуры, конструкций и инженерных систем между собой. Увязываю разделы АР, КР, ОВиК, ВК, ГВС, ХВС и СС в общей системе координат и проверяю согласованность цифровой модели.</p>
+              <p>Координирую модели архитектуры, конструкций и инженерных систем между собой. Увязываю разделы АР, КР, ОВиК, ВК и СС в общей системе координат и проверяю согласованность цифровой модели.</p>
               <ul class="check-list"><li>Посадка моделей на генплан и общие координаты</li><li>Мониторинг осей и уровней связанных моделей</li><li>Увязка разделов и контроль междисциплинарных коллизий</li><li>Обмен заданиями, требования BEP и проверка исправлений</li></ul>
-              <div class="tags"><span>АР</span><span>КР</span><span>ОВиК</span><span>ВК</span><span>ГВС</span><span>ХВС</span><span>СС</span></div>
+              <div class="tags"><span>АР</span><span>КР</span><span>ОВиК</span><span>ВК</span><span>СС</span></div>
             </article>
             <article class="competence-panel" id="management">
               <div class="panel-topline"><span class="micro">ЛЮДИ / ПРОЦЕССЫ / ДАННЫЕ</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 5h12v12H18zM5 31h12v12H5zm26 0h12v12H31zM24 17v7M11 31v-7h26v7"/></svg></div>
@@ -148,7 +140,7 @@
         <div class="case-menu js-only" role="group" aria-label="Демонстрационный кейс">
           <button type="button" data-case="family" aria-controls="case-family" aria-pressed="true"><small>01 / МОДЕЛИРОВАНИЕ</small>Параметрические семейства <span aria-hidden="true">→</span></button>
           <button type="button" data-case="estimate" aria-controls="case-estimate" aria-pressed="false"><small>02 / ДАННЫЕ И РАСЧЁТЫ</small>От спецификации к смете <span aria-hidden="true">→</span></button>
-          <button type="button" data-case="plugin" aria-controls="case-plugin" aria-pressed="false"><small>03 / ПЛАГИН И ДИАГНОСТИКА</small>Понятный инструмент <span aria-hidden="true">→</span></button>
+          <button type="button" data-case="plugin" aria-controls="case-plugin" aria-pressed="false"><small>03 / ПОДХОД К АВТОМАТИЗАЦИИ</small>Инструмент помогает <span aria-hidden="true">→</span></button>
           <button type="button" data-case="instruction" aria-controls="case-instruction" aria-pressed="false"><small>04 / ПЕРЕДАЧА ЗНАНИЙ</small>Интерактивные инструкции <span aria-hidden="true">→</span></button>
         </div>
         <article class="case-panel" id="case-family">
@@ -161,7 +153,7 @@
             <div class="case-copy family-controls">
               <p class="micro">СЕМЕЙСТВО → СКРИПТ / ПЛАГИН → ДАННЫЕ</p>
               <h3>Геометрия, комплектация<br>и правила — вместе.</h3>
-              <p>Семейства заранее подготовлены для автоматического и полуавтоматического моделирования. Изменение типа обновляет геометрию, параметры и состав спецификации.</p>
+              <p>Параметры и логика семейств подготовлены для работы скриптов и плагинов. Геометрия, комплектация и данные спецификации связаны едиными правилами.</p>
               <div class="field-grid">
                 <div class="field-wide"><label for="product-type">Конструкция</label><select id="product-type"><option value="window">Двустворчатое окно</option></select></div>
                 <div class="field-wide" id="size-field"><label for="family-size">Типоразмер, Ш × В, мм</label><select id="family-size"><option value="1500x1500">1500 × 1500</option></select></div>
@@ -186,7 +178,7 @@
                 <div class="field-grid"><div><label for="drain-length">Длина карниза, м</label><input type="number" id="drain-length" min="3" max="30" step="1" value="12"></div><div><label for="drain-height">Высота стояка, м</label><input type="number" id="drain-height" min="2" max="18" step=".5" value="6"></div><div><label for="drain-outlets">Водосточные стояки</label><input type="number" id="drain-outlets" min="1" max="4" step="1" value="2"></div><div><label for="drain-diameter">Диаметр трубы, мм</label><select id="drain-diameter"><option>75</option><option selected>100</option><option>125</option></select></div></div>
                 <p class="screen-footnote">Условная компоновка наружного водостока. Секции по 3 м, шаг кронштейнов желоба 0,6 м, хомутов трубы 2 м — приняты только для этого примера. Гидравлический расчёт не выполняется.</p>
               </fieldset>
-              <div class="parameter-row"><div><label for="family-count">Количество комплектов</label><input type="number" id="family-count" min="1" max="20" step="1" value="1"></div><div><label for="family-mode">Моделирование</label><select id="family-mode"><option value="semi">Полуавтоматическое</option><option value="auto">Автоматическое</option></select></div></div>
+              <div class="family-count-field"><label for="family-count">Количество комплектов</label><input type="number" id="family-count" min="1" max="20" step="1" value="1"></div>
             </div>
             <div class="case-screen family-preview">
               <div class="screen-heading"><span class="micro" id="product-caption">ДВУСТВОРЧАТОЕ ОКНО</span><span class="screen-indicator">LIVE</span></div>
@@ -195,7 +187,7 @@
               <p class="screen-footnote" id="product-view-note">Вид из помещения. На схеме один экземпляр; спецификация учитывает количество комплектов.</p>
               <div class="screen-metrics"><div><span>КОМПЛЕКТЫ</span><strong id="family-total">1 шт.</strong></div><div><span id="family-measure-label">ПЛОЩАДЬ ПРОЁМОВ</span><strong id="family-area">2,25 м²</strong></div></div>
               <div class="estimate-table-wrap"><table class="estimate-table bom-table"><caption>Состав и объёмы</caption><thead><tr><th scope="col">Позиция</th><th scope="col">Количество</th></tr></thead><tbody id="family-bom"></tbody></table></div>
-              <p class="screen-description" id="family-mode-text" aria-live="polite">Пользователь задаёт размещение; скрипт или плагин работает с подготовленными параметрами.</p>
+              <p class="screen-description">Пользователь задаёт параметры семейства. Геометрия, комплектация и объёмы спецификации пересчитываются вместе.</p>
               <details class="calculation-note"><summary>Как считаются откосы и комплектующие</summary><p>Боковые откосы: 2 × высота проёма × глубина. Верхний откос: ширина × глубина. Подоконник и отлив: ширина × количество. Фрамуга входит в общую высоту. Фурнитура показана по условной комплектации; монтажные вычеты и характеристики конкретного изделия не учтены.</p></details>
             </div>
           </div>
@@ -225,27 +217,34 @@
           </div>
         </article>
         <article class="case-panel" id="case-plugin">
-          <div class="plugin-intro"><div><p class="micro">ПОМОЩЬ → ПРОВЕРКА → ДИАГНОСТИКА → РЕЗУЛЬТАТ</p><h3>Плагин помогает пройти<br>весь путь до результата.</h3></div><p>Понятная справка, подсказки выбора, диагностика с ID элементов и повторная проверка после исправления. Ниже — браузерная демонстрация этих принципов.</p></div>
-          <div class="plugin-window">
-            <div class="plugin-titlebar"><span><i></i><i></i><i></i></span><b>Помощник проверки модели</b><small>ДЕМО</small></div>
-            <div class="plugin-toolbar">
-              <details class="plugin-help"><summary>Как работать — 4 шага</summary><ol><li>Выберите подходящее семейство. Подсказка объясняет, почему выбран линейный тип.</li><li>Нажмите «Проверить модель». Выберите строку диагностики.</li><li>Покажите элемент в 3D и скопируйте его ID. Исправьте причину замечания.</li><li>Повторите проверку: исправление должно быть подтверждено результатом проверки.</li></ol></details>
-              <div class="plugin-family-field"><label for="plugin-family">Семейство профиля</label><select id="plugin-family" aria-describedby="plugin-family-hint"><option value="">Выберите тип размещения</option><option value="line">Линейное — рекомендовано для стыка</option><option value="point">Точечное — для отдельной точки</option></select><p id="plugin-family-hint">Для протяжённого стыка подходит линейное семейство: его длина задаётся линией размещения.</p><button type="button" id="plugin-recommend" class="text-button">Выбрать рекомендованный вариант →</button></div>
-              <div class="plugin-run"><button type="button" class="button button-primary" id="plugin-check">Проверить модель</button><button type="button" class="text-button" id="plugin-reset">Сначала</button></div>
-            </div>
-            <p id="plugin-status" class="plugin-status" role="status">Выберите семейство и запустите проверку.</p>
-            <div class="plugin-body">
-              <div class="plugin-diagnostics"><h4>Диагностика <span id="plugin-issue-count">—</span></h4><div id="plugin-issues"><p class="screen-footnote">Здесь появятся причины замечаний и ID элементов.</p></div><div class="plugin-issue-actions"><button type="button" id="plugin-show" disabled>Показать в 3D</button><button type="button" id="plugin-copy" disabled>Копировать ID</button><button type="button" id="plugin-isolate" aria-pressed="false" disabled>Изолировать</button><button type="button" id="plugin-fix" disabled>Исправить в демо</button></div><p id="plugin-action-note" aria-live="polite"></p><input type="text" id="plugin-copy-fallback" aria-label="ID для ручного копирования" readonly hidden></div>
-              <div class="plugin-scene"><div class="screen-heading"><span class="micro">3D-ВИД · ДЕМОНСТРАЦИОННАЯ МОДЕЛЬ</span><span id="plugin-selected">Нет выбора</span></div>
-                <svg viewBox="0 0 520 300" class="plugin-model" role="img" aria-label="Условный 3D-вид с выбираемыми элементами">
-                  <path d="M30 215 245 100 493 225 280 292Z" class="scene-grid"/>
-                  <g data-model-element="23041" role="button" tabindex="0" aria-label="Выбрать в 3D элемент 23041"><path d="m75 157 155-80 107 56-154 81z"/><path d="m75 157 108 57v15L75 172zm108 57 154-81v15l-154 81z"/><text x="160" y="150">ID 23041</text></g>
-                  <g data-model-element="23042" role="button" tabindex="0" aria-label="Выбрать в 3D элемент 23042"><path d="m223 188 155-80 107 56-154 81z"/><path d="m223 188 108 57v15l-108-57zm108 57 154-81v15l-154 81z"/><text x="340" y="182">ID 23042</text></g>
-                </svg><p class="screen-footnote">Можно выбрать элемент прямо на схеме или через строку диагностики. ID условные. Реальная модель Revit не изменяется.</p>
-              </div>
-            </div>
-          </div>
-        </article>
+  <div class="plugin-intro"><div><p class="micro">ЧЕЛОВЕК + ИНСТРУМЕНТ</p><h3>Автоматизация помогает<br>принимать решения.</h3></div><p>Пользователь управляет задачей и выбором элементов. Инструмент берёт на себя повторяющиеся операции, подсказывает подходящие варианты и делает ограничения видимыми.</p></div>
+  <div class="practice-tabs js-only" role="group" aria-label="Принцип работы инструмента">
+    <button type="button" data-practice="guidance" aria-pressed="true">Подсказки при выборе<small>Осмысленный выбор</small></button>
+    <button type="button" data-practice="validation" aria-pressed="false">Проверки до изменения<small>Ошибку легче предупредить</small></button>
+    <button type="button" data-practice="context" aria-pressed="false">Работа на активном виде<small>Контекст остаётся перед глазами</small></button>
+  </div>
+  <div class="practice-workbench">
+    <div class="practice-copy"><p class="micro" id="practice-kicker">ПОЛУАВТОМАТИЧЕСКИЙ ПОДХОД</p><h4 id="practice-title">Выбор остаётся за человеком.</h4><p id="practice-description">Подходящие элементы заметны сразу. Подсказка объясняет рекомендацию и помогает принять решение без перебора вариантов наугад.</p>
+      <dl class="practice-roles"><div><dt>Человек</dt><dd id="practice-human">Задаёт намерение и выбирает элемент.</dd></div><div><dt>Система</dt><dd id="practice-system">Находит подходящие варианты и объясняет ограничения.</dd></div></dl>
+      <div class="practice-choice js-only" role="group" aria-label="Сравнить ситуации"><button type="button" data-practice-choice="good" aria-pressed="true">Подходящий элемент</button><button type="button" data-practice-choice="bad" aria-pressed="false">Элемент с ограничением</button></div>
+      <div class="practice-feedback" id="practice-feedback" role="status" data-tone="good">Вариант подходит: исходные данные согласованы. Решение о выборе принимает пользователь.</div>
+    </div>
+    <div class="practice-view"><div class="screen-heading"><span class="micro">АКТИВНЫЙ 3D-ВИД</span><span class="practice-live" id="practice-view-status">Подсказки в контексте</span></div><svg id="practice-scene" class="practice-model" viewBox="0 0 520 340" role="group" aria-label="Концепция помощи при моделировании на активном 3D-виде" data-practice="guidance" data-selection="good">
+    <title>Человек задаёт намерение, система помогает выбрать и проверить</title>
+    <polygon points="250,294.96 446.761,181.36 277.713,83.76 80.952,197.36" class="active-view-boundary" data-plane="view-boundary"/>
+    <g class="practice-context"><g data-context-element="true"><polygon points="435.676,158.96 471.703,138.16 471.703,132.4 435.676,153.2" class="practice-floor box-front" /><polygon points="435.676,158.96 396.878,136.56 396.878,130.8 435.676,153.2" class="practice-floor box-side" /><polygon points="435.676,153.2 471.703,132.4 432.905,110 396.878,130.8" class="practice-floor box-top" /><polygon points="435.676,153.2 471.703,132.4 432.905,110 396.878,130.8" class="practice-surface" data-plane="outside"/><text x="434.29" y="102" class="practice-element-label" >Другой контекст</text></g></g>
+    <g class="practice-backdrop"><polyline points="111.436,190 111.436,145.2 277.713,49.2 277.713,94" class="context-wall" /></g>
+    <g data-scene-node="blocked" role="button" tabindex="0" aria-label="Требует уточнения"><polygon points="333.138,227.76 416.277,179.76 416.277,174 333.138,222" class="practice-floor box-front" /><polygon points="333.138,227.76 194.574,147.76 194.574,142 333.138,222" class="practice-floor box-side" /><polygon points="333.138,222 416.277,174 277.713,94 194.574,142" class="practice-floor box-top" /><polygon points="333.138,222 416.277,174 277.713,94 194.574,142" class="practice-surface" data-plane="blocked"/><text x="305.426" y="174" class="practice-element-label" >Требует уточнения</text></g>
+    <g data-scene-node="target" role="button" tabindex="0" aria-label="Подходящий элемент"><polygon points="250,275.76 333.138,227.76 333.138,222 250,270" class="practice-floor box-front" /><polygon points="250,275.76 111.436,195.76 111.436,190 250,270" class="practice-floor box-side" /><polygon points="250,270 333.138,222 194.574,142 111.436,190" class="practice-floor box-top" /><polygon points="250,270 333.138,222 194.574,142 111.436,190" class="practice-surface" data-plane="target"/><text x="222.287" y="222" class="practice-element-label" >Подходящий элемент</text></g>
+    <polyline points="333.138,221.04 194.574,141.04" class="suggested-edge" />
+    <g class="practice-good-marker"><circle cx="222" cy="184" r="13"/><path d="m216 184 4 4 8-9"/></g>
+    <g class="practice-warning-marker"><circle cx="305" cy="136" r="13"/><path d="M305 128v9m0 5v1"/></g>
+    <text x="26" y="317" class="practice-view-label">ВЫБОР И ЗАМЕЧАНИЯ НА ОДНОМ ВИДЕ</text>
+    <g class="model-axis"><polyline points="458,302 477.919,290.5" class="axis-line" data-axis="x"/><polyline points="458,302 438.081,290.5" class="axis-line" data-axis="y"/><polyline points="458,302 458,279" class="axis-line" data-axis="z"/><text x="478.135" y="290.375" class="axis-label" >X</text><text x="437.865" y="290.375" class="axis-label" >Y</text><text x="458" y="278.75" class="axis-label" >Z</text></g>
+  </svg><div class="practice-legend"><span><i></i>Подходящий вариант</span><span><i class="warning-key"></i>Требует уточнения</span><span><i class="context-key"></i>Другой контекст</span></div><p class="screen-footnote" id="practice-scene-note">Выбор на схеме связан с пояснением. Пользователь видит причину рекомендации рядом с элементом.</p></div>
+  </div>
+  <p class="practice-footnote">Концепция лучших практик: осмысленный выбор, предварительные проверки и понятная обратная связь в контексте модели.</p>
+</article>
         <article class="case-panel" id="case-instruction">
           <div class="case-layout">
             <div class="case-copy">

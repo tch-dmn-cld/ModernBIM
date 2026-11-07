@@ -179,7 +179,6 @@
     }
     addRows(rows);
     $('family-total').textContent=count+' шт.';$('family-area').textContent=format(volume)+' '+unit;
-    $('family-mode-text').textContent=$('family-mode').value==='auto'?'Автоматическое моделирование: размещение по заданным правилам, единые параметры для семейства и инструмента.':'Полуавтоматическое моделирование: пользователь задаёт размещение; скрипт или плагин обрабатывает подготовленные параметры.';
     const rate=number('unit-rate',4500,0,1000000);
     $('estimate-type').textContent=source;$('estimate-count').textContent=count+' шт.';$('estimate-area').textContent=format(volume)+' '+unit;
     $('estimate-cost').textContent=format(volume*rate)+' ₽';$('estimate-equation').textContent=format(volume)+' '+unit+' × '+format(rate)+' ₽/'+unit;
@@ -194,7 +193,7 @@
     }update();
   });
   ['family-width','family-height'].forEach(id=>$(id).addEventListener('input',()=>{$('family-size').value='custom';update();}));
-  ['family-transom','transom-height','reveal-depth','family-reveals','window-left','window-right','window-sill','window-drip','door-opening','door-handle','door-closer','drain-length','drain-height','drain-outlets','drain-diameter','family-count','family-mode','unit-rate'].forEach(id=>$(id).addEventListener('input',update));
+  ['family-transom','transom-height','reveal-depth','family-reveals','window-left','window-right','window-sill','window-drip','door-opening','door-handle','door-closer','drain-length','drain-height','drain-outlets','drain-diameter','family-count','unit-rate'].forEach(id=>$(id).addEventListener('input',update));
   const bounds={'transom-height':[400,200,600],'reveal-depth':[200,50,600],'drain-length':[12,3,30],'drain-height':[6,2,18],'drain-outlets':[2,1,4],'family-count':[1,1,20],'unit-rate':[4500,0,1000000]};
   Object.entries(bounds).forEach(([id,[fallback,min,max]])=>$(id).addEventListener('change',()=>{
     let value=number(id,fallback,min,max);if(['family-count','drain-outlets'].includes(id))value=Math.round(value);
